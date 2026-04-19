@@ -1,0 +1,9 @@
+name: CI-CD-Test
+on: [push]
+
+jobs:
+  test-deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Check Connectivity
+        run: ansible all -i ~/hosts.ini -m ping
