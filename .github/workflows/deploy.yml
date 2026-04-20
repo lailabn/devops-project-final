@@ -7,3 +7,4 @@ jobs:
     steps:
       - name: Check Connectivity
         run: ansible all -i ~/hosts.ini -m ping
+# Demo pour le prof
