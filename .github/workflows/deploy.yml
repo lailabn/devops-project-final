@@ -1,10 +1,22 @@
-name: CI-CD-Test
-on: [push]
+name: Spotify Clone CI/CD
+
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  test-deployment:
+  build-and-deploy:
     runs-on: self-hosted
     steps:
-      - name: Check Connectivity
-        run: ansible all -i ~/hosts.ini -m ping
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -t spotify-backend ~/backend_project
+
+      - name: Deploy to Production via Ansible
+        run: |
+          ansible-playbook -i ~/hosts.ini ~/deploy_spotify_prod.yml
+
 # Demo pour le prof
